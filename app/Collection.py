@@ -10,7 +10,7 @@ conn.request("GET", "/tennis/trial/v3/en/competitions/sr:competition:3101/info.x
 res = conn.getresponse()
 data = res.read()
 
-print(data)
+print(data.decode("utf-8"))
 
 
 if res.status == 200:

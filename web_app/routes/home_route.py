@@ -1,23 +1,23 @@
-# this is the "web_app/routes/home_routes.py" file...
+# this is the "web_app/routes/home_route.py" file...
 
 from flask import Blueprint, request, render_template
 
-home_routes = Blueprint("home_routes", __name__)
+home_route = Blueprint("home_route", __name__)
 
-@home_routes.route("/")
-@home_routes.route("/home")
+@home_route.route("/")
+@home_route.route("/home")
 def index():
     print("HOME...")
     #return "Welcome Home"
     return render_template("home.html")
 
-@home_routes.route("/about")
+@home_route.route("/about")
 def about():
     print("ABOUT...")
     #return "About Me"
     return render_template("about.html")
 
-@home_routes.route("/hello")
+@home_route.route("/hello")
 def hello_world():
     print("HELLO...")
 
@@ -40,7 +40,7 @@ def hello_world():
 
 
 
-@home_routes.route("/api/books.json")
+@home_route.route("/api/books.json")
 def books():
     print("BOOKS...")
     books = [
