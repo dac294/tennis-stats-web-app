@@ -26,8 +26,10 @@ def get_tennis_stats():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
+'''
     live_matches, upcoming_matches = get_tennis_matches(api_key, api_endpoint)
 
     if live_matches is not None and upcoming_matches is not None:
         display_matches_summary(live_matches, upcoming_matches)
+
+'''

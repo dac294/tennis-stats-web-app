@@ -18,3 +18,4 @@ if res.status == 200:
 else:
     print(f"Request failed with status code: {res.status}")
 
+
