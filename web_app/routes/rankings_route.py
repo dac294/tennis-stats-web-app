@@ -5,7 +5,7 @@ from flask import Blueprint, request, render_template, redirect, flash
 
 from app.rankings import get_game_info
 
-rankings_routes = Blueprint("rankings_routes", __name__)
+rankings_routes = Blueprint("rankings_route", __name__)
 
 @rankings_routes.route("/rankings/dashboard")
 

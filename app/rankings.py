@@ -1,32 +1,52 @@
-from flask import Flask, render_template
 import http.client
 import json
 import datetime as dt
-import os 
+import pandas as pd
+import os
 from dotenv import load_dotenv
 
-load_dotenv()
-API_KEY = os.getenv("API_KEY")
+def get_player_id(player_name, dataframe):
+    player_row = dataframe[dataframe["player.name"] == player_name]
+    if not player_row.empty:
+        return player_row.iloc[0]["player.id"]
+    else:
+        return None
 
-app = Flask(__name__)
-
-def get_game_info(date):
+def get_game_info(date, rankings_link):
     conn = http.client.HTTPSConnection("api.sportradar.us")
-    conn.request("GET", f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}")
+    conn.request("GET", rankings_link)
 
     res = conn.getresponse()
     data = res.read().decode("utf-8")
     json_resp = json.loads(data)
     return json_resp
-'''
-@app.route('/')
-def index():
+
+def swap_names(player_name):
+    # Split the name into first name and last name
+    last_name, first_name = player_name.split(", ")
+    
+    # Format as "firstname lastname"
+    return f"{first_name} {last_name}"
+
+def rankings():
+    load_dotenv() #> invoking this function loads contents of the ".env" file into the script's environment...
+
+    API_KEY = os.getenv("API_KEY")
+
     date = dt.date.today()
-    game_info = get_game_info(date)
-    return render_template('index.html', game_info=game_info)
+    #API_KEY = "3z3vm5s67q4hdabtdmcsxsnd"
+    rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    player_name = input("enter a player: ")
 
-'''
+    game_info = get_game_info(date, rankings_link)['rankings']
+    #print(json.dumps(game_info, indent=2))  # Print the JSON representation for better readability 
 
+    df = pd.json_normalize(game_info, "player_rankings")
+
+    df["player.name"] = df["player.name"].apply(swap_names)
+
+    player_id_output = get_player_id(player_name, df)
+
+    return player_id_output
+rankings()
