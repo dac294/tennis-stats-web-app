@@ -6,7 +6,7 @@
 <html>
 
 <head>
-    <title>Player Profile</title>
+    <title> Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -19,8 +19,8 @@
                         playerName: $('#inputBox').val()
                     },
                     success: function (response) {
-                        console.log(response.result); // Handle the response from the server
-                        // You can update the DOM or run other functions here
+                        console.log(response); // Log the response to the console
+                        $('#resultDisplay').text(JSON.stringify(response, null, 2)); // Display the result in the page
                     }
                 });
             });
@@ -30,11 +30,12 @@
 
 <body>
     <form>
-        <label for="inputBox">Player Name:</label>
+        <label for="inputBox">Player Name: </label>
         <input type="text" id="inputBox" name="playerName">
         <input type="submit" value="Submit">
     </form>
+    <p id="resultDisplay"></p> <!-- Element to display the result -->
 </body>
 
-</html>
+
 {% endblock %}
