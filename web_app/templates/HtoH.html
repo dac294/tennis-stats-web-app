@@ -17,6 +17,32 @@
     <head>
         <title>Profile</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            #resultsTable {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            #resultsTable th,
+            #resultsTable td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            #resultsTable th {
+                background-color: #04AA6D;
+                color: white;
+            }
+
+            #resultsTable tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #resultsTable tr:hover {
+                background-color: #ddd;
+            }
+        </style>
         <script>
             $(document).ready(function () {
                 var player1Name, player1ID, player2Name, player2ID;
@@ -48,13 +74,30 @@
                             }
                             var last_meetings = result.last_meetings
 
+                            $('#resultsTable tbody').empty();
                             last_meetings.forEach(function (meeting) {
                                 var event = meeting.sport_event.sport_event_context.competition.name
-                                //var round_name = meeting.sport_event.sport_event_context.round.name
-                                var status = meeting.sport_event_status
-                                var home_score = status.home_score
-                                var away_score = status.away_score
-                                console.log(event)
+                                var round_name = meeting.sport_event.sport_event_context.round.name
+                                var year_played = meeting.sport_event.sport_event_context.stage.year
+                                var match_winner = meeting.sport_event_status.winner_id
+                                var match_score_away = meeting.sport_event_status.away_score
+                                var match_score_home = meeting.sport_event_status.home_score
+                                if (match_winner == player1ID) {
+                                    match_winner = player1Name
+                                } else {
+                                    match_winner = player2Name
+                                }
+                                console.log(match_winner)
+
+                                // Create an HTML string for the table row
+                                var rowHtml = '<tr>' +
+                                    '<td>' + year_played + '</td>' +
+                                    '<td>' + event + '</td>' +
+                                    '<td>' + round_name + '</td>' +
+                                    '<td>' + match_winner + '</td>' +
+                                    '<td>' + strting(match_score_home) - string(match_score_away) + '</td>' +
+                                    '</tr>';
+                                $('#resultsTable tbody').append(rowHtml);
                             })
 
 
@@ -70,6 +113,22 @@
             });
         </script>
     </head>
+    <!-- ... Additional tables for other data like surfaces -->
+    <h2>Head to Head Results:</h2>
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Year: </th>
+                <th>Event: </th>
+                <th>Round Played: </th>
+                <th>Winner: </th>
+                <th>Score: </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be appended here -->
+        </tbody>
+    </table>
 
 
 
