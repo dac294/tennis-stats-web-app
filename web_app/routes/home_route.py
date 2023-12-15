@@ -1,7 +1,8 @@
 # this is the "web_app/routes/home_route.py" file...
 
-from flask import Blueprint, request, render_template, redirect, flash
+from flask import Blueprint, request, render_template, redirect, flash, jsonify
 from app.rankings import full_rankings
+from app.player_profile import get_player_profile
 
 
 home_route = Blueprint("home_route", __name__)
@@ -28,9 +29,10 @@ def player_dashboard():
 @home_route.route('/handle_data', methods=['POST'])
 def handle_data():
     player_name = request.form['playerName']
+    result = get_player_profile(player_name)
     print(player_name)
     # Now you can store 'player_name' in a database or pass it to another page or function
-    return player_name
+    return jsonify({'result': result})
 
 
 

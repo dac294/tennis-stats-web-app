@@ -34,11 +34,9 @@ def swap_names(player_name):
     # Format as "firstname lastname"
     return f"{first_name} {last_name}"
 
-def rankings():
+def rankings(player_name):
     #API_KEY = "3z3vm5s67q4hdabtdmcsxsnd"
     rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
-
-    player_name = input("enter a player: ")
 
     game_info = get_game_info(date, rankings_link)['rankings']
     #print(json.dumps(game_info, indent=2))  # Print the JSON representation for better readability 
