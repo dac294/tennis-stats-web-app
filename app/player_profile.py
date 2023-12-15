@@ -22,6 +22,9 @@ def get_player_profile(player_name):
     player_link = f"https://api.sportradar.com/tennis/trial/v3/en/competitors/{comp_ID}/profile.json?api_key={API_KEY}"
 
     player_results = get_game_info(date,player_link)
-    print(player_results)
+    data = json.dumps(player_results, indent=2)
+    print(data)
     return(player_results)
-    #data = json.dumps(player_results, indent=2)
+
+if __name__=="__main__":
+    get_player_profile("Novak Djokovic")

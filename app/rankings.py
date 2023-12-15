@@ -12,7 +12,10 @@ API_KEY = os.getenv("API_KEY")
 date = dt.date.today()
 
 def get_player_id(player_name, dataframe):
-    player_row = dataframe[dataframe["player.name"] == player_name]
+    parts = player_name.split()
+    capitalized_parts = [part.capitalize() for part in parts]
+    capitalized_full_name = ' '.join(capitalized_parts)
+    player_row = dataframe[dataframe["player.name"] == capitalized_full_name]
     if not player_row.empty:
         return player_row.iloc[0]["player.id"]
     else:

@@ -3,6 +3,7 @@
 from flask import Blueprint, request, render_template, redirect, flash, jsonify
 from app.rankings import full_rankings
 from app.player_profile import get_player_profile
+from app.head_to_head import get_head_to_head 
 
 
 home_route = Blueprint("home_route", __name__)
@@ -20,6 +21,7 @@ def rankings_dashboard():
     return render_template("rankings_dashboard.html", rank_list=rank_list)
 
 
+# player info routes
 @home_route.route('/player/dashboard')
 def player_dashboard():
     return render_template("player_profile_dash.html")
@@ -34,3 +36,16 @@ def handle_data():
     return jsonify({'result': result})
 
 
+
+#head to head routes
+@home_route.route('/H2H/dashboard')
+def player_head_to_head():
+    return render_template("H2H.html")
+
+@home_route.route('/submit_data', methods=['POST'])
+def submit_data():
+    player_name = request.form['playerName']
+    print(player_name)
+    # Run your function with the player_name variable
+    result = get_head_to_head(player_name)
+    return jsonify({'result': result})
