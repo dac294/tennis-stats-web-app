@@ -5,6 +5,12 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 
+load_dotenv() #> invoking this function loads contents of the ".env" file into the script's environment...
+
+API_KEY = os.getenv("API_KEY")
+
+date = dt.date.today()
+
 def get_player_id(player_name, dataframe):
     player_row = dataframe[dataframe["player.name"] == player_name]
     if not player_row.empty:
@@ -19,6 +25,7 @@ def get_game_info(date, rankings_link):
     res = conn.getresponse()
     data = res.read().decode("utf-8")
     json_resp = json.loads(data)
+    #final_json = json.dumps(json_resp, indent=2)
     return json_resp
 
 def swap_names(player_name):
@@ -29,11 +36,6 @@ def swap_names(player_name):
     return f"{first_name} {last_name}"
 
 def rankings():
-    load_dotenv() #> invoking this function loads contents of the ".env" file into the script's environment...
-
-    API_KEY = os.getenv("API_KEY")
-
-    date = dt.date.today()
     #API_KEY = "3z3vm5s67q4hdabtdmcsxsnd"
     rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
 
@@ -49,4 +51,9 @@ def rankings():
     player_id_output = get_player_id(player_name, df)
 
     return player_id_output
-rankings()
+
+
+if __name__=="__main__":
+    rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
+    current_rankings = get_game_info(date, rankings_link)
+    print(current_rankings)

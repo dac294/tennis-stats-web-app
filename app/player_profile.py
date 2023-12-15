@@ -18,5 +18,5 @@ print(player_link)
 #print(player_results)
 
 
-df = pd.json_normalize(player_results)
-print(df)
+print(player_results)
+
