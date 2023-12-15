@@ -117,6 +117,7 @@
                             var periods = result.periods;
                             console.log(periods)
 
+
                             // Insert info
                             $('#infoTable tbody').empty();
                             var infoRow = $('<tr></tr>');
@@ -140,13 +141,35 @@
                                 rankingRow.append($('<td></td>').text(ranking.points));
                                 // ... Add more cells for rankings
                                 $('#rankingsTable tbody').append(rankingRow);
-
-
-                                $('#periodsTable tbody').empty();
-                                var periodsRow = $('<tr></tr>');
-                                periodsRow.append($('<td></td>').text(periods.year));
-                                $('#periodsTable tbody').append(periodsRow);
                             });
+
+
+                            $('#periodsTable tbody').empty(); // Empty the table body first
+                            periods.forEach(function (period) {
+                                var year = period.year;
+                                var surfaces = period.surfaces;
+
+                                surfaces.forEach(function (surface) {
+                                    var surface_type = surface.type; // "hardcourt_indoor"
+                                    var statistics = surface.statistics;
+
+                                    // Create an HTML string for the table row
+                                    var rowHtml = '<tr>' +
+                                        '<td>' + year + '</td>' +
+                                        '<td>' + surface_type + '</td>' +
+                                        '<td>' + statistics.competitions_played + '</td>' +
+                                        '<td>' + statistics.competitions_won + '</td>' +
+                                        '<td>' + statistics.matches_played + '</td>' +
+                                        '<td>' + statistics.matches_won + '</td>' +
+                                        '</tr>';
+
+                                    // Append the row to the table body
+                                    $('#periodsTable tbody').append(rowHtml);
+                                });
+                            });
+                            console.log(table_records)
+                            $('#periodsTable tbody').append(table_records);
+                            // No need to log table_records as it's not being used anymore
 
                             // Handle surfaces and other aspects similarly...
                         }
@@ -203,14 +226,12 @@
         </table>
 
         <!-- ... Additional tables for other data like surfaces -->
-
-        <!-- Rankings Table -->
-        <h2>Results:</h2>
+        <h2>Surface Statistics:</h2>
         <table id="periodsTable">
             <thead>
                 <tr>
                     <th>Year</th>
-                    <th>Surface Type</th>
+                    <th>Surface</th>
                     <th>Competitions Played</th>
                     <th>Competitions Won</th>
                     <th>Matches Played</th>
@@ -218,10 +239,9 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Rows will be appended here -->
             </tbody>
         </table>
 
-        <!-- ... Additional tables for other data like surfaces -->
-    </body>
 
-    {% endblock %}
+        {% endblock %}

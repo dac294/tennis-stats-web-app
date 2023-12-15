@@ -2,6 +2,8 @@ from rankings import rankings
 from rankings import get_game_info
 import datetime as dt
 import os
+import json
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,7 +27,8 @@ def get_head_to_head(player1, player2):
 
     h2h_results = get_game_info(date,h2h_link)
     print(h2h_link)
-    print(h2h_results)
+    data = json.dumps(h2h_results, indent=2)
+    print(data)
     return h2h_results
 
 

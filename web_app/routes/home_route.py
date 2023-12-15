@@ -35,17 +35,16 @@ def handle_data():
     result = get_player_profile(player_name)
     return jsonify({'result': result})
 
-
-
 #head to head routes
-@home_route.route('/H2H/dashboard')
+@home_route.route('/HtoH/dashboard')
 def player_head_to_head():
-    return render_template("H2H.html")
+    return render_template("HtoH.html")
 
 @home_route.route('/submit_data', methods=['POST'])
 def submit_data():
-    player_name = request.form['playerName']
-    print(player_name)
+    search1 = request.form.get('search1')
+    print(search1)
+    search2 = request.form.get('search2')
     # Run your function with the player_name variable
-    result = get_head_to_head(player_name)
-    return jsonify({'result': result})
+    H2H_result = get_head_to_head(search1, search2)
+    return jsonify({'result': H2H_result})

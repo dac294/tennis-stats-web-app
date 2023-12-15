@@ -1,0 +1,66 @@
+{% extends "bootstrap.html" %}
+{% set active_page = "HtoH" %}
+
+{% block content %}
+<form action="{{ url_for('home_route.submit_data') }}" method="post">
+    <label for="search1">Input player:</label>
+    <input type="text" id="search1" name="search1">
+
+    <label for="search2">versus</label>
+    <input type="text" id="search2" name="search2">
+
+    <input type="submit" value="Submit">
+</form>
+
+<body>
+
+    <head>
+        <title>Profile</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var player1Name, player1ID, player2Name, player2ID;
+
+                $('form').on('submit', function (event) {
+                    event.preventDefault(); // Prevent the form from submitting via the browser
+
+                    var player1 = $('#search1').val();
+                    var player2 = $('#search2').val();
+
+                    $.ajax({
+                        url: "{{ url_for('home_route.submit_data') }}",
+                        method: 'POST',
+                        data: {
+                            search1: player1,
+                            search2: player2
+                        },
+                        success: function (response) {
+                            var result = response.result
+                            var competitors = result.competitors
+                            if (competitors.length >= 2) {
+                                // Assuming the first two competitors in the array are the ones you're interested in
+                                player1Name = competitors[0].name;
+                                player1ID = competitors[0].id;
+
+                                player2Name = competitors[1].name;
+                                player2ID = competitors[1].id;
+                            }
+                            var last_meetings = result.last_meetings
+
+
+
+
+
+                            // Handle the response here
+                            console.log(response, player1Name, player2Name, player2ID, player1ID); // For debugging, log the response to the console
+                            // You can update the DOM based on the response
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+
+
+
+    {% endblock %}
