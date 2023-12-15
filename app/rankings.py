@@ -25,7 +25,6 @@ def get_game_info(date, rankings_link):
     res = conn.getresponse()
     data = res.read().decode("utf-8")
     json_resp = json.loads(data)
-    #final_json = json.dumps(json_resp, indent=2)
     return json_resp
 
 def swap_names(player_name):
@@ -56,4 +55,22 @@ def rankings():
 if __name__=="__main__":
     rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
     current_rankings = get_game_info(date, rankings_link)
-    print(current_rankings)
+    #data = json.dumps(current_rankings, indent=2)
+    data = current_rankings
+   
+    atp_player_info = []
+    wta_player_info = []
+    for ranking in data["rankings"]:
+        for player in ranking["player_rankings"]:
+            player_record = {
+                "name": player["player"]["name"],
+                "rank": player["rank"],
+                "ranking_movement": player["ranking_movement"],
+                "nationality": player["player"]["nationality"]
+            }
+            
+            if ranking["type"] == "ATP":
+                atp_player_info.append(player_record)
+            elif ranking["type"] == "WTA":
+                wta_player_info.append(player_record)
+    print(atp_player_info)
