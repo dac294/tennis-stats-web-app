@@ -20,19 +20,17 @@ def rankings_dashboard():
     return render_template("rankings_dashboard.html", rank_list=rank_list)
 
 
-@home_route.route("/player/dashboard")
+@home_route.route('/player/dashboard')
 def player_dashboard():
-
     return render_template("player_profile_dash.html")
 
 
 @home_route.route('/handle_data', methods=['POST'])
 def handle_data():
     player_name = request.form['playerName']
-    result = get_player_profile(player_name)
     print(player_name)
-    # Now you can store 'player_name' in a database or pass it to another page or function
+    # Run your function with the player_name variable
+    result = get_player_profile(player_name)
     return jsonify({'result': result})
-
 
 

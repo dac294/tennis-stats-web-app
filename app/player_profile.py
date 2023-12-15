@@ -1,3 +1,7 @@
+import sys
+# Append the directory containing 'rankings.py' to sys.path
+sys.path.append('/Users/alexcoletti/Documents/GitHub/tennis-stats-web-app/app')
+from rankings import rankings
 from rankings import get_game_info, rankings 
 import datetime as dt
 import os

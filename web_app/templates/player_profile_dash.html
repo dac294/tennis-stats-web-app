@@ -13,7 +13,7 @@
             $('form').on('submit', function (event) {
                 event.preventDefault(); // Prevent the form from submitting via the browser
                 $.ajax({
-                    url: "{{ url_for('handle_data') }}",
+                    url: "{{ url_for('home_route.handle_data') }}",
                     method: 'POST',
                     data: {
                         playerName: $('#inputBox').val()
