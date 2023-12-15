@@ -95,13 +95,10 @@
                                     '<td>' + event + '</td>' +
                                     '<td>' + round_name + '</td>' +
                                     '<td>' + match_winner + '</td>' +
-                                    '<td>' + strting(match_score_home) - string(match_score_away) + '</td>' +
+                                    '<td>' + match_score_home + ' - ' + match_score_away + '</td>' +
                                     '</tr>';
                                 $('#resultsTable tbody').append(rowHtml);
                             })
-
-
-
 
 
                             // Handle the response here
@@ -122,7 +119,7 @@
                 <th>Event: </th>
                 <th>Round Played: </th>
                 <th>Winner: </th>
-                <th>Score: </th>
+                <th>Score (sets): </th>
             </tr>
         </thead>
         <tbody>
