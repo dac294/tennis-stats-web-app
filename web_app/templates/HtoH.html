@@ -49,7 +49,8 @@
                             var last_meetings = result.last_meetings
 
                             last_meetings.forEach(function (meeting) {
-                                var event = meeting.sport_event
+                                var event = meeting.sport_event.sport_event_context.competition.name
+                                //var round_name = meeting.sport_event.sport_event_context.round.name
                                 var status = meeting.sport_event_status
                                 var home_score = status.home_score
                                 var away_score = status.away_score
