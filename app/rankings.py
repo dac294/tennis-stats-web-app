@@ -52,7 +52,7 @@ def rankings():
     return player_id_output
 
 
-if __name__=="__main__":
+def full_rankings():
     rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
     current_rankings = get_game_info(date, rankings_link)
     #data = json.dumps(current_rankings, indent=2)
@@ -74,3 +74,9 @@ if __name__=="__main__":
             elif ranking["type"] == "WTA":
                 wta_player_info.append(player_record)
     print(atp_player_info)
+    return atp_player_info
+
+if __name__=="__main__":
+    full_rankings()
+
+

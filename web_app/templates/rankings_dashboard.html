@@ -1,0 +1,37 @@
+{% extends "bootstrap.html" %}
+{% set active_page = "rankings_dashboard" %}
+
+{% block content %}
+
+<h1>ATP Rankings List</h1>
+
+<table class="table table-hover table-responsive caption-top">
+    <caption>Latest Rankings</caption>
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Rank</th>
+            <th scope="col">Nationality</th>
+            <th scope="col">Rank Movement</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <!--
+        JINJA FOR LOOP
+        https://jinja.palletsprojects.com/en/3.1.x/templates/
+    -->
+        {% for row in rank_list %}
+        <tr>
+            <td>{{ row["name"] }}</td>
+            <td>{{ row["rank"] }}</td>
+            <td>{{ row["nationality"] }}</td>
+            <td>{{ row["ranking_movement"] }}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

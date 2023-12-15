@@ -1,6 +1,8 @@
 # this is the "web_app/routes/home_route.py" file...
 
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, redirect, flash
+from app.rankings import full_rankings
+
 
 home_route = Blueprint("home_route", __name__)
 
@@ -9,28 +11,26 @@ home_route = Blueprint("home_route", __name__)
 def index():
     print("HOME...")
     #return "Welcome Home"
-    return render_template("home.html")
+    return render_template("bootstrap.html")
 
-'''
-@home_route.route("/hello")
-def hello_world():
-    print("HELLO...")
+@home_route.route("/rankings/dashboard")
+def rankings_dashboard():
+    rank_list = full_rankings()
+    return render_template("rankings_dashboard.html", rank_list=rank_list)
 
-    # if the request contains url params, for example a request to "/hello?name=Harper"
-    # the request object's args property will hold the values in a dictionary-like structure
-    url_params = dict(request.args)
-    print("URL PARAMS:", url_params) #> can be empty like {} or full of params like {"name":"Harper"}
 
-    # get a specific key called "name" if available, otherwise use some specified default value
-    # see also: https://www.w3schools.com/python/ref_dictionary_get.asp
-    #try:
-    #    name = url_params["name"]
-    #except:
-    #    name= "World"
-    name = url_params.get("name") or "World"
+@home_route.route("/player/dashboard")
+def player_dashboard():
 
-    message = f"Hello, {name}!"
-    #return message
-    return render_template("hello.html", message=message, x=5)
+    return render_template("player_profile_dash.html")
 
-'''
+
+@home_route.route('/handle_data', methods=['POST'])
+def handle_data():
+    player_name = request.form['playerName']
+    print(player_name)
+    # Now you can store 'player_name' in a database or pass it to another page or function
+    return player_name
+
+
+
