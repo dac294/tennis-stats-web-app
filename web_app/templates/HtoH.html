@@ -37,6 +37,7 @@
                         success: function (response) {
                             var result = response.result
                             var competitors = result.competitors
+                            var table_records = []
                             if (competitors.length >= 2) {
                                 // Assuming the first two competitors in the array are the ones you're interested in
                                 player1Name = competitors[0].name;
@@ -47,12 +48,20 @@
                             }
                             var last_meetings = result.last_meetings
 
+                            last_meetings.forEach(function (meeting) {
+                                var event = meeting.sport_event
+                                var status = meeting.sport_event_status
+                                var home_score = status.home_score
+                                var away_score = status.away_score
+                                console.log(event)
+                            })
+
 
 
 
 
                             // Handle the response here
-                            console.log(response, player1Name, player2Name, player2ID, player1ID); // For debugging, log the response to the console
+                            console.log(response); // For debugging, log the response to the console
                             // You can update the DOM based on the response
                         }
                     });
