@@ -1,3 +1,6 @@
+import sys
+# Append the directory containing 'rankings.py' to sys.path
+sys.path.append('/Users/alexcoletti/Documents/GitHub/tennis-stats-web-app/app')
 from rankings import rankings
 from rankings import get_game_info
 import datetime as dt
@@ -33,5 +36,7 @@ def get_head_to_head(player1, player2):
 
 
 if __name__=="__main__":
-    get_head_to_head("Novak Djokovic", "Carlos Alcaraz")
+    player1 = input("enter the first player")
+    player2 = input("enter the second player")
+    get_head_to_head(player1, player2)
 
