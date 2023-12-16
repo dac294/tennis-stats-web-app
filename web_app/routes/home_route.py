@@ -9,11 +9,12 @@ from app.head_to_head import get_head_to_head
 home_route = Blueprint("home_route", __name__)
 
 @home_route.route("/")
-@home_route.route("/home")
 def index():
-    print("HOME...")
-    #return "Welcome Home"
     return render_template("bootstrap.html")
+
+@home_route.route("/home")
+def Home_page():
+    return render_template("home.html")
 
 @home_route.route("/rankings/dashboard")
 def rankings_dashboard():
