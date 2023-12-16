@@ -37,6 +37,7 @@ def get_game_info(date, rankings_link):
         print(f"Error: {err}")
     return None
 
+#use as a backup in case requests does not work
 '''def get_game_info(date, rankings_link):
     conn = http.client.HTTPSConnection("api.sportradar.us")
     conn.request("GET", rankings_link)
@@ -59,7 +60,6 @@ def swap_names(player_name):
     return f"{first_name} {last_name}"
 
 def rankings(player_name):
-    #API_KEY = "3z3vm5s67q4hdabtdmcsxsnd"
     rankings_link = f"https://api.sportradar.com/tennis/trial/v2/en/players/rankings.json?api_key={API_KEY}"
 
     game_info = get_game_info(date, rankings_link)['rankings']
