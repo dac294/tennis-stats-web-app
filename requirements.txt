@@ -3,6 +3,6 @@ pandas
 http.client
 python-dotenv
 sportradar-api==0.2.8
-
+pytest
 
 
