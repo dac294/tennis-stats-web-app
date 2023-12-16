@@ -1,8 +1,8 @@
-import http.client
 import json
 import datetime as dt
 import pandas as pd
 import os
+import requests
 from dotenv import load_dotenv
 
 load_dotenv() #> invoking this function loads contents of the ".env" file into the script's environment...
@@ -22,6 +22,22 @@ def get_player_id(player_name, dataframe):
         return None
 
 def get_game_info(date, rankings_link):
+    try:
+        response = requests.get(rankings_link)
+        response.raise_for_status()  # This will raise an HTTPError if the HTTP request returned an unsuccessful status code
+        data = response.json()  # Directly parse the response to JSON
+        return data
+    except requests.exceptions.HTTPError as errh:
+        print(f"Http Error: {errh}")
+    except requests.exceptions.ConnectionError as errc:
+        print(f"Error Connecting: {errc}")
+    except requests.exceptions.Timeout as errt:
+        print(f"Timeout Error: {errt}")
+    except requests.exceptions.RequestException as err:
+        print(f"Error: {err}")
+    return None
+
+'''def get_game_info(date, rankings_link):
     conn = http.client.HTTPSConnection("api.sportradar.us")
     conn.request("GET", rankings_link)
     res = conn.getresponse()
@@ -30,7 +46,7 @@ def get_game_info(date, rankings_link):
         return json.loads(data)
     else:
         print(f"API request failed: Status {res.status}")
-        return None
+        return None'''
 '''    data = res.read().decode("utf-8")
     json_resp = json.loads(data)
     return json_resp'''
