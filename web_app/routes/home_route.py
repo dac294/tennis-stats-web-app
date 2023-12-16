@@ -5,6 +5,7 @@ from app.head_to_head import get_head_to_head
 
 home_route = Blueprint("home_route", __name__)
 
+# routes that lead to the homepage
 @home_route.route("/")
 def index():
     return render_template("bootstrap.html")
@@ -13,6 +14,7 @@ def index():
 def Home_page():
     return render_template("home.html")
 
+#route that builds the rankings dashboard
 @home_route.route("/rankings/dashboard")
 def rankings_dashboard():
     try:
@@ -23,10 +25,12 @@ def rankings_dashboard():
         print(f"Error in rankings_dashboard: {e}")
         return "An error occurred", 500
 
+# route that builds the player profile dashboard
 @home_route.route('/player/dashboard')
 def player_dashboard():
     return render_template("player_profile_dash.html")
 
+#takes inputs from html and runs player profile script
 @home_route.route('/handle_data', methods=['POST'])
 def handle_data():
     try:
@@ -38,10 +42,13 @@ def handle_data():
         print(f"Error in handle_data: {e}")
         return jsonify({'error': 'An error occurred'}), 500
 
+
+# route that builds the head to head dashboard
 @home_route.route('/HtoH/dashboard')
 def player_head_to_head():
     return render_template("HtoH.html")
 
+#code that recieves the searchbox entries and runs the head to head script
 @home_route.route('/submit_data', methods=['POST'])
 def submit_data():
     try:

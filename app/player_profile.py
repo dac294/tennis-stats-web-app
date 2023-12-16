@@ -27,4 +27,8 @@ def get_player_profile(player_name):
     return(player_results)
 
 if __name__=="__main__":
-    get_player_profile("Novak Djokovic")
+    player = input("enter a player name: ")
+    get_player_profile(player) 
+
+
+    
