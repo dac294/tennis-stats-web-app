@@ -1,6 +1,6 @@
 flask
 pandas
-pycurl
+pycurl==7.45.1
 http.client
 python-dotenv
 sportradar-api==0.2.8
