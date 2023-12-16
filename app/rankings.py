@@ -24,11 +24,16 @@ def get_player_id(player_name, dataframe):
 def get_game_info(date, rankings_link):
     conn = http.client.HTTPSConnection("api.sportradar.us")
     conn.request("GET", rankings_link)
-
     res = conn.getresponse()
-    data = res.read().decode("utf-8")
+    if res.status == 200:
+        data = res.read().decode("utf-8")
+        return json.loads(data)
+    else:
+        print(f"API request failed: Status {res.status}")
+        return None
+'''    data = res.read().decode("utf-8")
     json_resp = json.loads(data)
-    return json_resp
+    return json_resp'''
 
 def swap_names(player_name):
     # Split the name into first name and last name

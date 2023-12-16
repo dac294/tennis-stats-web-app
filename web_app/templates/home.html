@@ -1,0 +1,52 @@
+{% extends "bootstrap.html" %}
+{% set active_page = "player_profile_dash" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Head content remains the same -->
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align: center;">Welcome to Tennis Stats Central</h1>
+    </header>
+
+    <main>
+        <!-- Bootstrap Carousel -->
+        <div id="tennisCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://wallpapercave.com/wp/wp5306595.jpg" class="d-block w-100" alt="Tennis Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://wallpapercave.com/wp/wp5306624.jpg" class="d-block w-100" alt="Tennis Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://wallpapercave.com/wp/wp3645910.jpg" class="d-block w-100" alt="Tennis Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://wallpapercave.com/wp/wp5306617.jpg" class="d-block w-100" alt="Tennis Image 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://wallpapercave.com/wp/wp5306598.jpg" class="d-block w-100" alt="Tennis Image 5">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#tennisCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#tennisCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Rest of your main content -->
+    </main>
+</body>
+
+</html>
+{% endblock %}
