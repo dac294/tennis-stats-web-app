@@ -30,8 +30,8 @@ def get_head_to_head(player1, player2):
 
     h2h_results = get_game_info(date,h2h_link)
     print(h2h_link)
-    data = json.dumps(h2h_results, indent=2)
-    print(data)
+    #data = json.dumps(h2h_results, indent=2)
+    #print(data)
     return h2h_results
 
 
